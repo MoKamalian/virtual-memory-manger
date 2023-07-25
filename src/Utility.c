@@ -10,6 +10,7 @@
 
 #include "../inc/Utility.h"
 
+
 /***/
 void checkFile(FILE* file) {
 

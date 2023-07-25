@@ -1,3 +1,3 @@
-/Users/mokamalian/Documents/C++_Practice/virtual-memory-manager/cmake-build-debug/CMakeFiles/virtual_memory_manager.dir
-/Users/mokamalian/Documents/C++_Practice/virtual-memory-manager/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/mokamalian/Documents/C++_Practice/virtual-memory-manager/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/amir/Documents/C++_projects/virtual-memory-manger/cmake-build-debug/CMakeFiles/virtual_memory_manager.dir
+/home/amir/Documents/C++_projects/virtual-memory-manger/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/amir/Documents/C++_projects/virtual-memory-manger/cmake-build-debug/CMakeFiles/rebuild_cache.dir
