@@ -22,8 +22,6 @@
 extern unsigned int tlb[TLB_SIZE];
 
 
-void checkFile(FILE* file);
-
 void checkAddress(int address);
 
 

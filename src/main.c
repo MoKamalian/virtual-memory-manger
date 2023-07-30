@@ -7,13 +7,14 @@
  * */
 
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 
 
-#define COMPARATOR ".txt" /** used to compare the first argument is a text file */
+#define COMPARATOR ".txt" /** used to compare that the first argument passed to the program is a text file */
 
 /** validates the command line input */
 bool checkArg(char** str);
@@ -36,9 +37,34 @@ int main(int argc, char** argv) {
         exit(0); 
     }
 
-    FILE* file;
+
+    char* file_path = argv[1];
+    char file_mode[] = "r";
+    FILE* file = fopen(file_path, file_mode);
+    /* checks if file is NULL */
+    if(file != NULL) {
+
+        /* ========= address translation occurs below ========= */
+        char* address = NULL;
+        size_t len = 0;
+        while(getline(&address, &len, file) != -1) {
+
+            
+            printf("address: %s", address);
 
 
+        }
+
+        free(address);
+        address = NULL;
+
+    } else if(file == NULL) {
+        printf("[error : could not find file ]");
+        exit(0);
+    }
+
+
+    fclose(file);
 
     return 0;
 };
@@ -53,10 +79,6 @@ bool checkArg(char** str) {
 
 
 
-// TODO: read in the file with the addresses to translate
-    // TODO: verify the txt file
-    // TODO: read in the numbers and verify them
-    // TODO: store addresses for translation
 
 
 

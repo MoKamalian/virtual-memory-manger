@@ -12,11 +12,6 @@
 
 
 /***/
-void checkFile(FILE* file) {
-
-}
-
-/***/
 void checkAddress(int address) {
 
 }
