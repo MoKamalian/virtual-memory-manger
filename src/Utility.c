@@ -20,13 +20,30 @@ u_int32_t TLB[TLB_SIZE];
 u_int32_t PAGE_TABLE[PAGE_TABLE_SIZE];
 
 
-/** Loads the requested page from backing store into main memory. This
- * function is used in case of a cache miss within the page table.
+/** @brief Loads the requested page from backing store into main memory. This
+ * function is used in case of a page miss within the page table.
  * @param page_number: the requested page to bring from backing store.
- * @param page_table: this table is updated with the new page brought in. */
-void get_page(u_int32_t page_number, u_int32_t page_table[]) {
+ * @param page_table: this table is updated with the new page brought in.
+ * @note function returns -1 if file pointer is null. File must be opened before
+ * passing file pointer argument to function. Backing_store must be a file with
+ * .bin extension. */
+
+/**
+ * TODO: NEED TO UPDATE PAGE TABLE, TEST FUNCTION, NEED TO COUNT PAGE FAULTS STATISTICS
+ * */
+int get_page(u_int32_t page_number, u_int8_t main_memory[], FILE* backing_store) {
+    if(backing_store == NULL) {
+        return -1;
+    } else {
+        fseek(backing_store, page_number * PAGE_SIZE, SEEK_SET);
+        fread(main_memory, sizeof(u_int8_t), PAGE_SIZE, backing_store);
+    }
+};
+
+static void load_page(FILE* backing_store) {
 
 };
+
 
 /** converts the in_address (text) to an integer value set to out_address
  * @param in_address: string value of the memory address to be converted

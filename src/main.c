@@ -17,6 +17,7 @@
   *  @TODO 3. check page table function
   *  @TODO 4. page replacement function
   *  @TODO 5. page fault function --> DO FIRST
+  *
   * */
 
 
@@ -31,10 +32,11 @@
 
 
 #define COMPARATOR ".txt" /** used to compare that the first argument passed to the program is a text file */
+#define COMPARATOR_BIN ".bin";
 
 
 /** validates the command line input */
-bool validate_args(char** str);
+bool validate_arg(char* str);
 
 
 int main(int argc, char** argv) {
@@ -50,15 +52,25 @@ int main(int argc, char** argv) {
     }
 
     /* check valid text file was given */
-    if(!validate_args(argv)) {
+    if(!validate_arg(argv[1])) {
         printf("[ error : non-text file given ]");
         exit(0); 
     }
 
+    if(!validate_arg(argv[2])) {
+        printf("[ error : file given does not have .bin extension ]");
+        printf("[ hint : argument order should be: file.txt file.bin ]");
+        exit(0);
+    }
+
+    /* backing store file */
+    char* bin_file_path = argv[2];
+    FILE* backing_store = fopen(bin_file_path, "rb");
+
+
 
     char* file_path = argv[1];
-    char file_mode[] = "r";
-    FILE* file = fopen(file_path, file_mode);
+    FILE* file = fopen(file_path, "r");
     /* checks if file is NULL */
     if(file != NULL) {
 
@@ -97,8 +109,8 @@ int main(int argc, char** argv) {
 /** @param str: command line arguments to be validated
  * @return true if the command line argument is a text file
  * (only the first argument is checked in str) */
-bool validate_args(char** str) {
-    return strstr(str[1], COMPARATOR) != NULL ? true : false;
+bool validate_arg(char* str) {
+    return strstr(str, COMPARATOR) != NULL ? true : false;
 }
 
 

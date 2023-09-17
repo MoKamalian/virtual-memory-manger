@@ -47,7 +47,7 @@ u_int32_t check_tlb(u_int32_t page_number);
 u_int32_t check_page_table(u_int32_t page_number);
 
 /** Page fault; retrieve page from backing store and bring it into memory. */
-void get_page(u_int32_t page_number, u_int32_t page_table[]);
+int get_page(u_int32_t page_number, u_int8_t main_memory[], FILE* backing_store);
 
 /** Updates the TLB. Uses FIFO algorithm. */
 void tlb_update(u_int32_t page_number, u_int32_t frame_number);
