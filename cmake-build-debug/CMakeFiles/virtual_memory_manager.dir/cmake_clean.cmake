@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/virtual_memory_manager.dir/src/LRU.c.o"
+  "CMakeFiles/virtual_memory_manager.dir/src/LRU.c.o.d"
   "CMakeFiles/virtual_memory_manager.dir/src/Utility.c.o"
   "CMakeFiles/virtual_memory_manager.dir/src/Utility.c.o.d"
   "CMakeFiles/virtual_memory_manager.dir/src/main.c.o"

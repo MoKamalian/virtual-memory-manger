@@ -76,6 +76,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/amir/Documents/C++_projects/virtual-memory-manger/src/LRU.c">
+			<Option target="virtual_memory_manager"/>
+		</Unit>
 		<Unit filename="/home/amir/Documents/C++_projects/virtual-memory-manger/src/Utility.c">
 			<Option target="virtual_memory_manager"/>
 		</Unit>

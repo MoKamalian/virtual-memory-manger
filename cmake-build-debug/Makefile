@@ -129,6 +129,30 @@ virtual_memory_manager/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/virtual_memory_manager.dir/build.make CMakeFiles/virtual_memory_manager.dir/build
 .PHONY : virtual_memory_manager/fast
 
+src/LRU.o: src/LRU.c.o
+.PHONY : src/LRU.o
+
+# target to build an object file
+src/LRU.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/virtual_memory_manager.dir/build.make CMakeFiles/virtual_memory_manager.dir/src/LRU.c.o
+.PHONY : src/LRU.c.o
+
+src/LRU.i: src/LRU.c.i
+.PHONY : src/LRU.i
+
+# target to preprocess a source file
+src/LRU.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/virtual_memory_manager.dir/build.make CMakeFiles/virtual_memory_manager.dir/src/LRU.c.i
+.PHONY : src/LRU.c.i
+
+src/LRU.s: src/LRU.c.s
+.PHONY : src/LRU.s
+
+# target to generate assembly for a file
+src/LRU.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/virtual_memory_manager.dir/build.make CMakeFiles/virtual_memory_manager.dir/src/LRU.c.s
+.PHONY : src/LRU.c.s
+
 src/Utility.o: src/Utility.c.o
 .PHONY : src/Utility.o
 
@@ -186,6 +210,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... virtual_memory_manager"
+	@echo "... src/LRU.o"
+	@echo "... src/LRU.i"
+	@echo "... src/LRU.s"
 	@echo "... src/Utility.o"
 	@echo "... src/Utility.i"
 	@echo "... src/Utility.s"

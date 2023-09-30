@@ -17,6 +17,7 @@
   *  @TODO 3. check page table function
   *  @TODO 4. page replacement function
   *  @TODO 5. page fault function --> DO FIRST
+  *     @TODO 5 a. implement LRU algorithm for page replacement
   *
   * */
 
@@ -36,7 +37,7 @@
 
 
 /** validates the command line input */
-bool validate_arg(char* str);
+bool validate_arg(char* str, char* comparator);
 
 
 int main(int argc, char** argv) {
@@ -52,12 +53,14 @@ int main(int argc, char** argv) {
     }
 
     /* check valid text file was given */
-    if(!validate_arg(argv[1])) {
+    char txt[] = COMPARATOR;
+    if(!validate_arg(argv[1], txt)) {
         printf("[ error : non-text file given ]");
         exit(0); 
     }
 
-    if(!validate_arg(argv[2])) {
+    char bin[] = COMPARATOR_BIN
+    if(!validate_arg(argv[2], bin)) {
         printf("[ error : file given does not have .bin extension ]");
         printf("[ hint : argument order should be: file.txt file.bin ]");
         exit(0);
@@ -66,7 +69,6 @@ int main(int argc, char** argv) {
     /* backing store file */
     char* bin_file_path = argv[2];
     FILE* backing_store = fopen(bin_file_path, "rb");
-
 
 
     char* file_path = argv[1];
@@ -90,6 +92,7 @@ int main(int argc, char** argv) {
 
             printf("page offset: %d\n", offset);
 
+
         }
 
         address = NULL;
@@ -109,8 +112,8 @@ int main(int argc, char** argv) {
 /** @param str: command line arguments to be validated
  * @return true if the command line argument is a text file
  * (only the first argument is checked in str) */
-bool validate_arg(char* str) {
-    return strstr(str, COMPARATOR) != NULL ? true : false;
+bool validate_arg(char* str, char* comparator) {
+    return strstr(str, comparator) != NULL ? true : false;
 }
 
 

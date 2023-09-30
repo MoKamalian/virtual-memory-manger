@@ -17,33 +17,33 @@ u_int8_t MAIN_MEMORY[MAIN_MEMORY_SIZE];
 u_int32_t TLB[TLB_SIZE];
 /** Page table definition; 256 entries total. Each entry is a frame that contains the page number, i.e.
  * frame 0 (entry 0), frame 1 (entry 1) and so on. */
-u_int32_t PAGE_TABLE[PAGE_TABLE_SIZE];
+u_int32_t PAGE_TABLE[PAGE_TABLE_SIZE] = { 0 };
 
+/** for statistics purposes */
+u_int32_t page_faults = 0;
+u_int32_t tlb_misses = 0;
 
 /** @brief Loads the requested page from backing store into main memory. This
  * function is used in case of a page miss within the page table.
  * @param page_number: the requested page to bring from backing store.
+ * @param main_memory: where pages read from backing_store are loaded into.
  * @param page_table: this table is updated with the new page brought in.
+ * @param backing_store: where pages are stored for retrieval
  * @note function returns -1 if file pointer is null. File must be opened before
  * passing file pointer argument to function. Backing_store must be a file with
  * .bin extension. */
-
 /**
  * TODO: NEED TO UPDATE PAGE TABLE, TEST FUNCTION, NEED TO COUNT PAGE FAULTS STATISTICS
  * */
-int get_page(u_int32_t page_number, u_int8_t main_memory[], FILE* backing_store) {
+int get_page(u_int32_t page_number, u_int8_t main_memory[], u_int32_t page_table[], FILE* backing_store) {
     if(backing_store == NULL) {
         return -1;
     } else {
         fseek(backing_store, page_number * PAGE_SIZE, SEEK_SET);
-        fread(main_memory, sizeof(u_int8_t), PAGE_SIZE, backing_store);
+        fread(main_memory + page_table[page_number] * PAGE_SIZE, sizeof(u_int8_t), PAGE_SIZE, backing_store);
+        page_faults++;
     }
 };
-
-static void load_page(FILE* backing_store) {
-
-};
-
 
 /** converts the in_address (text) to an integer value set to out_address
  * @param in_address: string value of the memory address to be converted
