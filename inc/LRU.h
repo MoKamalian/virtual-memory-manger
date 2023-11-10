@@ -11,23 +11,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct PageList {
+typedef struct PageNode {
 
-    struct PageNode {
+    u_int32_t page_number;
+    struct PageNode *next_page;
+    struct PageNode *prev_page;
 
-        u_int32_t page_number;
-        struct PageNode *next_page;
-        struct PageNode *prev_page;
+} PageNode;
 
-    } PageNode;
+
+typedef struct PageStack {
 
     struct PageNode* head;
     struct PageNode* tail;
 
-} PageList;
+} PageStack;
 
 /** page linked list functionality **/
 
+/** @brief searches for a specific page within pageList */
+PageNode* search_for(u_int32_t page_number, PageStack* pstack);
+
+/** @brief push the page to the top of the stack */
+void push_to_top(PageNode* page, PageStack* pstack);
+
+/** @brief removes the bottom node from the stack */
+void pop_bottom(PageStack* pstack);
 
 
 #endif
