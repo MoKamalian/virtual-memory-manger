@@ -6,20 +6,7 @@
  *
  * */
 
-// TODO: 1. write the logic 'initializing' the page table and the tlb
-    /** @TODO 1A. write logic for reading and writing to the backing store and updating the page table
-     * remember that the page table is a record of the pages that are in memory.
-     * @TODO 1B. write logic for updating the page table, i.e. removing and adding pages
-     * @TODO 1C. initially the TLB (and the page table) will be empty. The TLB can be an empty
-     * array of pairs -> the page table and corresponding frame
-     * @TODO 1D. TLB will need update algorithms, can simply use FIFO as the TLB is small */
- /** @TODO 2. check TLB function
-  *  @TODO 3. check page table function
-  *  @TODO 4. page replacement function
-  *  @TODO 5. page fault function --> DO FIRST
-  *     @TODO 5 a. implement LRU algorithm for page replacement
-  *
-  * */
+
 
 
 

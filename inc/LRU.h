@@ -11,20 +11,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct PageList {
 
-typedef struct PageNode {
-    u_int32_t page_number;
-    struct PageNode* next_page;
-    struct PageNode* prev_page; 
-} PageNode;
+    struct PageNode {
 
+        u_int32_t page_number;
+        struct PageNode *next_page;
+        struct PageNode *prev_page;
 
+    } PageNode;
 
+    struct PageNode* head;
+    struct PageNode* tail;
 
+} PageList;
 
-
-
-
+/** page linked list functionality **/
 
 
 
