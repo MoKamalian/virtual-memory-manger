@@ -9,8 +9,8 @@ CMakeFiles/virtual_memory_manager.dir/src/main.c.o: \
  /usr/include/x86_64-linux-gnu/bits/long-double.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/lib/gcc/x86_64-unknown-linux-gnu/12.2.0/include/stddef.h \
- /usr/lib/gcc/x86_64-unknown-linux-gnu/12.2.0/include/stdarg.h \
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/13.2.0/include/stddef.h \
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/13.2.0/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
  /usr/include/x86_64-linux-gnu/bits/time64.h \
@@ -20,6 +20,7 @@ CMakeFiles/virtual_memory_manager.dir/src/main.c.o: \
  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h /usr/include/stdlib.h \
@@ -48,7 +49,7 @@ CMakeFiles/virtual_memory_manager.dir/src/main.c.o: \
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/lib/gcc/x86_64-unknown-linux-gnu/12.2.0/include/stdbool.h \
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/13.2.0/include/stdbool.h \
  /usr/include/string.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
@@ -57,8 +58,8 @@ CMakeFiles/virtual_memory_manager.dir/src/main.c.o: \
  /usr/include/errno.h /usr/include/x86_64-linux-gnu/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/x86_64-linux-gnu/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
- /usr/lib/gcc/x86_64-unknown-linux-gnu/12.2.0/include-fixed/limits.h \
- /usr/lib/gcc/x86_64-unknown-linux-gnu/12.2.0/include-fixed/syslimits.h \
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/13.2.0/include/limits.h \
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/13.2.0/include/syslimits.h \
  /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
  /usr/include/linux/limits.h \

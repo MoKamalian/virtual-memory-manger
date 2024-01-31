@@ -11,6 +11,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * Replace the page that has not been used for the longest period of time  
+ * */
+
 typedef struct PageNode {
 
     u_int32_t page_number;

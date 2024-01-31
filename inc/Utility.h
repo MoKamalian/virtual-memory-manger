@@ -37,7 +37,7 @@ extern u_int32_t PAGE_TABLE[];
 
 
 /** address translation function: converts virtual address to physical address. A TLB and
- * page table and used. */
+ * page table are used. */
 u_int32_t translate_address(u_int32_t address, u_int32_t page_table[], u_int32_t tlb[]);
 
 /** Checks the TLB for presence of page entry. Returns frame number where page resides. */

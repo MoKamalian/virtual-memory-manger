@@ -50,8 +50,7 @@ int get_page(u_int32_t page_number, u_int8_t main_memory[], u_int32_t page_table
  * @param out_address: variable to set the converted string memory address
  * @param range: the valid address range
  * @note: out_address is set to -1 if address cannot be converted to an integer
- * value or is out of memory range. Range is 0-range.
- * */
+ * value or is out of memory range. Range is 0-range. */
 void convert_address(const char* str_address, u_int32_t* out_address, u_int32_t range) {
     char* endptr = NULL;
     long value = strtol(str_address, &endptr, 10);
@@ -84,7 +83,7 @@ void convert_address(const char* str_address, u_int32_t* out_address, u_int32_t 
 
 /** This function is used to extract the page number and offset. A mask and a shift value
  * are provided and a bitwise AND is performed to extract the bits containing the page
- * number or page offset.
+ * number (8 shifts to the right) or page offset (0 shifts to the right).
  * @param address: the integer value to extract bits from
  * @param mask: the mask to use on 'address'
  * @param shift: number of bits to shift 'address' by to the right; use 0 to not shift bits

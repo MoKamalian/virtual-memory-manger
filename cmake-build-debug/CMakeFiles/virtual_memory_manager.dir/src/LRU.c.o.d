@@ -1,7 +1,7 @@
-CMakeFiles/virtual_memory_manager.dir/src/Utility.c.o: \
- /home/amir/Documents/C++_projects/virtual-memory-manger/src/Utility.c \
+CMakeFiles/virtual_memory_manager.dir/src/LRU.c.o: \
+ /home/amir/Documents/C++_projects/virtual-memory-manger/src/LRU.c \
  /usr/include/stdc-predef.h \
- /home/amir/Documents/C++_projects/virtual-memory-manger/src/../inc/Utility.h \
+ /home/amir/Documents/C++_projects/virtual-memory-manger/src/../inc/LRU.h \
  /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -50,15 +50,4 @@ CMakeFiles/virtual_memory_manager.dir/src/Utility.c.o: \
  /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h /usr/include/errno.h \
- /usr/include/x86_64-linux-gnu/bits/errno.h /usr/include/linux/errno.h \
- /usr/include/x86_64-linux-gnu/asm/errno.h \
- /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
- /usr/lib/gcc/x86_64-unknown-linux-gnu/13.2.0/include/limits.h \
- /usr/lib/gcc/x86_64-unknown-linux-gnu/13.2.0/include/syslimits.h \
- /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
- /usr/include/x86_64-linux-gnu/bits/local_lim.h \
- /usr/include/linux/limits.h \
- /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
- /usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h \
- /usr/include/x86_64-linux-gnu/bits/posix2_lim.h
+ /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
