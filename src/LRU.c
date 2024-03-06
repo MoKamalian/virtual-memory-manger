@@ -17,6 +17,7 @@ PageNode* search_for(u_int32_t page_number, PageStack* pstack) {
         if(curr->page_number == page_number) {
             return curr;
         }
+        curr = curr->next_page;
     }
 }
 
@@ -46,15 +47,28 @@ void push_to_top(PageNode* page, PageStack* pstack) {
  * This is the least recently used page that can be removed. */
 void pop_bottom(PageStack* pstack) {
     if(pstack->tail != nullptr) {
-        PageNode *tail_node = pstack->tail;
-        pstack->tail = tail_node->prev_page;
+        PageNode *remove_node = pstack->tail;
+        pstack->tail = remove_node->prev_page;
         pstack->tail->next_page = nullptr;
-        free(tail_node);
+        free(remove_node);
+        remove_node = nullptr;
+    }
+}
+
+/** @brief removes all nodes and frees the allocated memory, deleting
+ * entire page table. Checks if each node pointer is null before
+ * memory is freed. */
+void delete_page_table(PageStack* pstack) {
+    PageNode* temp;
+    while(pstack->head != nullptr) {
+        temp = pstack->head;
+        pstack->head = pstack->head->next_page;
+        free(temp);
     }
 }
 
 /* temporary helper function to print all nodes */
-void print(PageStack* pstack) {
+void print_pages(PageStack* pstack) {
     PageNode* curr = pstack->head;
     while(curr != nullptr) {
         printf("%d", curr->page_number);

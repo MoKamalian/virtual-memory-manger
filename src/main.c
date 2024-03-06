@@ -114,18 +114,35 @@ int main(int argc, char** argv) {
     p3 = (PageNode*)malloc(sizeof(PageNode));
 
     p1->page_number = 1;
+    p1->next_page = p2;
 
+    p2->page_number = 2;
+    p2->prev_page = p1;
+    p2->next_page = p3;
 
-    p2->page_number = 1;
+    p3->page_number = 3;
+    p3->prev_page = p2;
 
+    PageStack page_table = {.head = p1, .tail = p3};
 
-    p3->page_number = 1;
+    print_pages(&page_table);
 
+    PageNode* searched_page = search_for(2, &page_table);
+
+    printf("%d", searched_page->page_number);
+
+    push_to_top(p2, &page_table);
+
+    print_pages(&page_table);
+
+    pop_bottom(&page_table);
+
+    print_pages(&page_table);
 
     fclose(file);
     free(p1);
     free(p2);
-    free(p3);
+    //free(p3); is being freed in 'pop_bottom' function; will have to move memory allocation and freeing away from main
 
 
     return 0;
