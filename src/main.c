@@ -7,23 +7,21 @@
  * */
 
 // TODO: 1. write the logic 'initializing' the page table and the tlb
-    /** @TODO 1A. write logic for reading and writing to the backing store and updating the page table
+    /**
      * remember that the page table is a record of the pages that are in memory.
      * @TODO 1B. write logic for updating the page table, i.e. removing and adding pages
      * @TODO 1C. initially the TLB (and the page table) will be empty. The TLB can be an empty
      * array of pairs -> the page table and corresponding frame
      * @TODO 1D. TLB will need update algorithms, can simply use FIFO as the TLB is small */
  /** @TODO 2. check TLB function
-  *  @TODO 3. check page table function
+  *
   *  @TODO 4. page replacement function
   *  @TODO 5. page fault function --> DO FIRST
   *     @TODO 5 a. implement LRU algorithm for page replacement
   *
-  *     https://github.com/forestLoop/Learning-EI338/blob/master/Project-8/vm_manager.c
+  *
   *
   * */
-
-
 
 
 
@@ -80,21 +78,40 @@ int main(int argc, char** argv) {
 
         /* ========= address translation occurs below ========= */
         char* address = NULL;
-        u_int32_t converted_address = 0;
+        u_int32_t virtual_address = 0;
         size_t len = 0;
         while(getline(&address, &len, file) != -1) {
 
             /* simply converts string address to integer value */
-            convert_address(address, &converted_address, MAX_PHYSMEM_SIZE);
+            convert_address(address, &virtual_address, MAX_PHYSMEM_SIZE);
 
-            u_int32_t masked_address = mask_address(&converted_address, RIGHT_8_MASK, 8);
+            u_int32_t page_number = mask_address(&virtual_address, BIT8_MASK, 8);
+            u_int32_t offset = mask_address(&virtual_address, BIT8_MASK, 0);
 
-            printf("page number: %d\n", masked_address);
-
-            u_int32_t offset = mask_address(&converted_address, RIGHT_8_MASK, 0);
-
+            printf("page number: %d\n", page_number);
             printf("page offset: %d\n", offset);
 
+            // TODO: check TLB before checking page table
+
+            /* page fault handling */
+            if(check_page_table(3, PAGE_TABLE) == 0) {
+
+                /* check page number if valid */
+                if(page_number > PAGE_TABLE_SIZE) {
+                    printf("[inappropriate page number]");
+                    break;
+                }
+
+                /* retrieve page from backing store */
+                long verify = get_page(page_number, MAIN_MEMORY, PAGE_TABLE, backing_store);
+                if(verify < 0) {
+                    printf("[page loading from backing store failure]");
+                    break;
+                }
+
+            }
+
+            printf("physical address: %d\n", (PAGE_TABLE[page_number] << 8 | offset));
 
         }
 
@@ -105,6 +122,9 @@ int main(int argc, char** argv) {
         exit(0);
     }
 
+
+
+    /* validation of LRU algorithm
     PageNode* p1 = nullptr;
     PageNode* p2 = nullptr;
     PageNode* p3 = nullptr;
@@ -126,22 +146,27 @@ int main(int argc, char** argv) {
     PageStack page_table = {.head = p1, .tail = p3};
 
     print_pages(&page_table);
+    printf("\n");
 
     PageNode* searched_page = search_for(2, &page_table);
 
     printf("%d", searched_page->page_number);
+    printf("\n");
 
     push_to_top(p2, &page_table);
 
     print_pages(&page_table);
+    printf("\n");
 
     pop_bottom(&page_table);
 
     print_pages(&page_table);
+    printf("\n");
 
     fclose(file);
     free(p1);
     free(p2);
+    */
     //free(p3); is being freed in 'pop_bottom' function; will have to move memory allocation and freeing away from main
 
 
@@ -155,7 +180,6 @@ int main(int argc, char** argv) {
 bool validate_arg(char* str, char* comparator) {
     return strstr(str, comparator) != NULL != 0;
 }
-
 
 
 

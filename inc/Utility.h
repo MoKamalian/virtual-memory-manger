@@ -20,11 +20,11 @@
 #define TLB_SIZE 16                /* total number of entries for the TLB */
 #define PAGE_TABLE_SIZE 256        /* total number of entries within the page table */
 #define FRAME_SIZE 256             /* max frame size in bytes (i.e. 256 bytes) */
-#define TOTAL_FRAMES 128           /* the total number of frames available */
+#define TOTAL_FRAMES 256           /* the total number of frames available */
 #define MAX_PHYSMEM_SIZE 65536     /* total memory size in bytes since 256 frames each 256 bytes in size */
 #define INVAL_ADD (-1)             /* invalid address error for text to integer conversion purposes */
-#define RIGHT_16_MASK (0xFFFF)     /* used to mask the right most 16 bits of the address (page number + offset) */
-#define RIGHT_8_MASK (0xFF)        /* used to extract the page offset */
+#define BIT16_MASK (0xFFFF)     /* used to mask the right most 16 bits of the address (page number + offset) */
+#define BIT8_MASK (0xFF)        /* used to extract the page offset */
 #define BIT_32 (32)                /* 32 bit architecture */
 
 
@@ -35,6 +35,7 @@ extern u_int32_t TLB[];
 /** PAGE TABLE declaration */
 extern u_int32_t PAGE_TABLE[];
 
+extern u_int32_t free_frame;
 
 /** address translation function: converts virtual address to physical address. A TLB and
  * page table are used. */
@@ -43,11 +44,14 @@ u_int32_t translate_address(u_int32_t address, u_int32_t page_table[], u_int32_t
 /** Checks the TLB for presence of page entry. Returns frame number where page resides. */
 u_int32_t check_tlb(u_int32_t page_number);
 
-/** checks the page table for page entry. Returns frame number where page resides. */
-u_int32_t check_page_table(u_int32_t page_number);
+/** checks the page table for page entry. Returns 0 for miss and 1 for hit. */
+u_int32_t check_page_table(u_int32_t page_number, const u_int32_t* page_table);
+
+/** updates the page table after page fault has occurred and page is brought in from backing store */
+u_int32_t update_page_table(u_int32_t frame_number, u_int32_t page_number, u_int32_t* page_table);
 
 /** Page fault; retrieve page from backing store and bring it into memory. */
-int get_page(u_int32_t page_number, u_int8_t main_memory[], u_int32_t page_table[], FILE* backing_store);
+long  get_page(u_int32_t page_number, u_int8_t* main_memory, u_int32_t* page_table, FILE* backing_store);
 
 /** Updates the TLB. Uses FIFO algorithm. */
 void tlb_update(u_int32_t page_number, u_int32_t frame_number);

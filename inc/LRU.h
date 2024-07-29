@@ -18,6 +18,7 @@
 typedef struct PageNode {
 
     u_int32_t page_number;
+    u_int8_t valid;
     struct PageNode *next_page;
     struct PageNode *prev_page;
 
@@ -50,7 +51,6 @@ void pop_bottom(PageStack* pstack);
 /** @brief removes all nodes and frees the allocated memory, deleting
  * entire page table */
 void delete_page_table(PageStack* pstack);
-
 
 void print_pages(PageStack* pstack);
 
