@@ -29,7 +29,7 @@
 
 
 /** Declaration memory size */
-extern u_int8_t MAIN_MEMORY[];
+extern int8_t MAIN_MEMORY[];
 /** TLB declaration; 16 total entries */
 extern u_int32_t TLB[];
 /** PAGE TABLE declaration */
@@ -45,13 +45,10 @@ u_int32_t translate_address(u_int32_t address, u_int32_t page_table[], u_int32_t
 u_int32_t check_tlb(u_int32_t page_number);
 
 /** checks the page table for page entry. Returns 0 for miss and 1 for hit. */
-u_int32_t check_page_table(u_int32_t page_number, const u_int32_t* page_table);
-
-/** updates the page table after page fault has occurred and page is brought in from backing store */
-u_int32_t update_page_table(u_int32_t frame_number, u_int32_t page_number, u_int32_t* page_table);
+int check_page_table(u_int32_t page_number, const u_int32_t* page_table);
 
 /** Page fault; retrieve page from backing store and bring it into memory. */
-long  get_page(u_int32_t page_number, u_int8_t* main_memory, u_int32_t* page_table, FILE* backing_store);
+long  get_page(u_int32_t page_number, int8_t* main_memory, u_int32_t* page_table, FILE* backing_store);
 
 /** Updates the TLB. Uses FIFO algorithm. */
 void tlb_update(u_int32_t page_number, u_int32_t frame_number);

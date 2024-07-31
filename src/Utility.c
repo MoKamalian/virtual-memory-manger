@@ -12,7 +12,7 @@
 
 
 /** Main (physical) memory definition; total  32'768 bytes */
-u_int8_t MAIN_MEMORY[MAIN_MEMORY_SIZE];
+int8_t MAIN_MEMORY[MAIN_MEMORY_SIZE];
 /** TLB definition 16 entries total */
 u_int32_t TLB[TLB_SIZE];
 /** Page table definition; 256 entries total; 256 pages total. Each entry is a frame that contains the page number, i.e.
@@ -32,9 +32,9 @@ u_int32_t free_frame = 0;
  * @return: 0 if there is a page table miss; 1 when there is a page table hit. Also returns 0 for
  * invalid values.
  * */
-u_int32_t check_page_table(u_int32_t page_number, const u_int32_t* page_table) {
+int check_page_table(u_int32_t page_number, const u_int32_t* page_table) {
     if(page_number >= PAGE_TABLE_SIZE) {
-        return 0;
+        return -1;
     } else {
         u_int32_t frame = page_table[page_number];
         if(frame == 0) {
@@ -43,16 +43,6 @@ u_int32_t check_page_table(u_int32_t page_number, const u_int32_t* page_table) {
             return 1; // page table hit
         }
     }
-}
-
-/** @brief When a page fault occurs and a new page is brought in from backing store, this function
- * is used to update the page table with the corresponding frame number used to load the page.
- * @param frame_number: frame number the page was loaded into.
- * @param page_number: the page bring brought in from backing store.
- * @param page_table: the page table to be updated.
- * @return */
-u_int32_t update_page_table(u_int32_t frame_number, u_int32_t page_number, u_int32_t* page_table) {
-
 }
 
 /** @brief Loads the requested page from backing store into main memory. This
@@ -64,7 +54,7 @@ u_int32_t update_page_table(u_int32_t frame_number, u_int32_t page_number, u_int
  * @note function returns -1 if file pointer is null. File must be opened before
  * passing file pointer argument to function. Backing_store must be a file with
  * .bin extension. Function returns 0 when successfully retrieves page and loads into memory. */
-long get_page(u_int32_t page_number, u_int8_t* main_memory, u_int32_t* page_table, FILE* backing_store) {
+long get_page(u_int32_t page_number, int8_t* main_memory, u_int32_t* page_table, FILE* backing_store) {
     page_table[page_number] = free_frame;
     if(free_frame < TOTAL_FRAMES) {
         free_frame++;

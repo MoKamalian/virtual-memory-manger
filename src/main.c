@@ -6,28 +6,9 @@
  *
  * */
 
-// TODO: 1. write the logic 'initializing' the page table and the tlb
-    /**
-     * remember that the page table is a record of the pages that are in memory.
-     * @TODO 1B. write logic for updating the page table, i.e. removing and adding pages
-     * @TODO 1C. initially the TLB (and the page table) will be empty. The TLB can be an empty
-     * array of pairs -> the page table and corresponding frame
-     * @TODO 1D. TLB will need update algorithms, can simply use FIFO as the TLB is small */
- /** @TODO 2. check TLB function
-  *
-  *  @TODO 4. page replacement function
-  *  @TODO 5. page fault function --> DO FIRST
-  *     @TODO 5 a. implement LRU algorithm for page replacement
-  *
-  *
-  *
-  * */
-
-
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 #include "../inc/Utility.h"
 #include "../inc/LRU.h"
@@ -88,19 +69,10 @@ int main(int argc, char** argv) {
             u_int32_t page_number = mask_address(&virtual_address, BIT8_MASK, 8);
             u_int32_t offset = mask_address(&virtual_address, BIT8_MASK, 0);
 
-            printf("page number: %d\n", page_number);
-            printf("page offset: %d\n", offset);
-
             // TODO: check TLB before checking page table
 
             /* page fault handling */
-            if(check_page_table(3, PAGE_TABLE) == 0) {
-
-                /* check page number if valid */
-                if(page_number > PAGE_TABLE_SIZE) {
-                    printf("[inappropriate page number]");
-                    break;
-                }
+            if(PAGE_TABLE[page_number] == 0) {
 
                 /* retrieve page from backing store */
                 long verify = get_page(page_number, MAIN_MEMORY, PAGE_TABLE, backing_store);
@@ -111,64 +83,20 @@ int main(int argc, char** argv) {
 
             }
 
-            printf("physical address: %d\n", (PAGE_TABLE[page_number] << 8 | offset));
+            u_int32_t physical_address = (PAGE_TABLE[page_number] << 8) | offset;
+            int8_t value = MAIN_MEMORY[physical_address];
+
+            printf("Logical address: %d Physical address: %d Value: %d\n", virtual_address, physical_address, value);
 
         }
 
         address = NULL;
+        fclose(backing_store);
 
     } else if(file == NULL) {
         printf("[error : could not find file ]");
         exit(0);
     }
-
-
-
-    /* validation of LRU algorithm
-    PageNode* p1 = nullptr;
-    PageNode* p2 = nullptr;
-    PageNode* p3 = nullptr;
-
-    p1 = (PageNode*)malloc(sizeof(PageNode));
-    p2 = (PageNode*)malloc(sizeof(PageNode));
-    p3 = (PageNode*)malloc(sizeof(PageNode));
-
-    p1->page_number = 1;
-    p1->next_page = p2;
-
-    p2->page_number = 2;
-    p2->prev_page = p1;
-    p2->next_page = p3;
-
-    p3->page_number = 3;
-    p3->prev_page = p2;
-
-    PageStack page_table = {.head = p1, .tail = p3};
-
-    print_pages(&page_table);
-    printf("\n");
-
-    PageNode* searched_page = search_for(2, &page_table);
-
-    printf("%d", searched_page->page_number);
-    printf("\n");
-
-    push_to_top(p2, &page_table);
-
-    print_pages(&page_table);
-    printf("\n");
-
-    pop_bottom(&page_table);
-
-    print_pages(&page_table);
-    printf("\n");
-
-    fclose(file);
-    free(p1);
-    free(p2);
-    */
-    //free(p3); is being freed in 'pop_bottom' function; will have to move memory allocation and freeing away from main
-
 
     return 0;
 };
